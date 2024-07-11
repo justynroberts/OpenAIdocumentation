@@ -1,0 +1,95 @@
+[ {
+  "defaultTab" : "nodes",
+  "description" : "Automatically Create Documentation updates with GenAI - Upload to confluence (optional)\n\n**Automation Job**\n\nThe Automation Job, named \"AI Documentation Assistant (Confluence version),\" is designed to automate the documentation process within an enterprise environment by leveraging the capabilities of the Rundeck and OpenAI APIs. It fetches a job's definition from a Rundeck server, generates new documentation based on a given prompt, and updates the job's description in Rundeck with this new content. Additionally, it offers the option to upload the generated documentation to Confluence, streamlining the documentation workflow in enterprise settings.\n\n**Prerequisites**\n\n- Active Rundeck instance with at least one accessible job\n- Valid OpenAI API token\n- Python environment with the `requests` and `openai` libraries installed\n\n**Options**\n\n| Option                                | Description                                           | Default Value                          |\n|---------------------------------------|-------------------------------------------------------|----------------------------------------|\n| OpenAI API Token                      | Token for OpenAI API authentication.                  | N/A                                    |\n| Runbook Automation Server             | Full URL of your Runbook Automation Server.           | https://rdse.runbook.pagerduty.cloud   |\n| Update Single Job or Entire Project   | Whether to update a single job or the entire project. | 1 Job (Enforced, Required)             |\n| Job UUID                              | Long alphanumeric UUID of your job.                   | N/A                                    |\n| Project Name                          | Name of your project (if updating the entire project).| N/A                                    |\n| Upload to Confluence?                 | Whether to upload the documentation to Confluence.    | Yes                                    |\n\n**Disclaimer**\n\nThis document and the described automation job are provided \"as is\" without warranty of any kind, express or implied. The user assumes all risks associated with the use of this job. The creators or contributors are not liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this job, even if advised of the possibility of such damage.\n\n**Automation Job**\n\nThe script in the Automation Job is written in Python and is meant to automate the documentation process using Rundeck and OpenAI APIs. It involves fetching job definitions, generating new documentation, and updating job descriptions. The script also provides the option to upload the generated documentation to Confluence. The script interacts with the Rundeck and OpenAI APIs, performs modifications to job definitions and documentation, and handles posting to Confluence.\n\n**Prerequisites**\n\n- Active Rundeck instance with at least one accessible job\n- Valid OpenAI API token\n- Python environment with the `requests` and `openai` libraries installed\n\n**Options**\n\n| External Variable                    | Default Value                                        |\n|--------------------------------------|------------------------------------------------------|\n| OpenAI API Token                     | N/A                                                  |\n| Runbook Automation Server            | https://rdse.runbook.pagerduty.cloud                  |\n| Update Single Job or Entire Project  | 1 Job (Enforced, Required)                           |\n| Job UUID                             | N/A                                                  |\n| Project Name                         | N/A                                                  |\n| Upload to Confluence?                | Yes                                                  |\n\n**Disclaimer**\n\nThis document and the described automation job are provided \"as is\" without warranty of any kind, express or implied. The user assumes all risks associated with the use of this job. The creators or contributors are not liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this job, even if advised of the possibility of such damage.\n\n**Supplied As Is Disclaimer Statement**\n\nThis document and the described automation job are provided \"as is\" without warranty of any kind, express or implied. The user assumes all risks associated with the use of this job. The creators or contributors are not liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this job, even if advised of the possibility of such damage.",
+  "executionEnabled" : true,
+  "group" : "⚙️ Toolbox",
+  "id" : "f6975c35-c075-4098-94c1-9c692b4698cb",
+  "loglevel" : "INFO",
+  "maxMultipleExecutions" : "5",
+  "multipleExecutions" : true,
+  "name" : "GenAI Documentation Assistant",
+  "nodeFilterEditable" : false,
+  "options" : [ {
+    "description" : "Enter your Job UUID (Long Alphanumeric). \nThis is the only entry you need if you are not uploading to Confluence\n\n---",
+    "label" : "Job UUID",
+    "name" : "JOB_ID"
+  }, {
+    "description" : "Enter your OpenAI token (Or token for your local LLM)",
+    "hidden" : true,
+    "label" : "OpenAI API Token",
+    "name" : "API_TOKEN",
+    "secure" : true,
+    "storagePath" : "keys/project/production/OpenAIKey",
+    "valueExposed" : true
+  }, {
+    "hidden" : true,
+    "label" : "RBA TOKEN",
+    "name" : "RBA_TOKEN",
+    "secure" : true,
+    "storagePath" : "keys/project/production/Rundeck_API_Key",
+    "valueExposed" : true
+  }, {
+    "description" : "nter the full URL of the Runbook Automation Server.  \nEg. https://rdse.runbook.pagerduty.cloud  \n---",
+    "hidden" : true,
+    "label" : "Runbook Automation Server",
+    "name" : "RUNBOOK_SERVER",
+    "value" : "http://sparks.local:4440"
+  }, {
+    "description" : "\n",
+    "enforced" : true,
+    "label" : "Upload to Confluence?",
+    "name" : "CONFLUENCE",
+    "required" : true,
+    "value" : "No",
+    "values" : [ "Yes", "No" ],
+    "valuesListDelimiter" : ","
+  }, {
+    "description" : "https://",
+    "label" : "Confluence Server",
+    "name" : "CONFLUENCE_LOCATION",
+    "value" : "YOUR CONFLUENCE URL"
+  }, {
+    "description" : "Token",
+    "label" : "Confluence Username",
+    "name" : "CONFLUENCE_USER",
+    "value" : "youruser@company.com"
+  }, {
+    "description" : "Generated in..",
+    "hidden" : true,
+    "label" : "Confluence Token",
+    "name" : "CONFLUENCE_TOKEN",
+    "type" : "text",
+    "value" : "1234"
+  }, {
+    "description" : "Your Confluence Space ID eg CD",
+    "label" : "Confluence Space",
+    "name" : "CONFLUENCE_SPACEKEY",
+    "type" : "text",
+    "value" : "CD"
+  }, {
+    "description" : "Choose between\nPick a Model\n\n- gpt-3.5-turbo-16k\n- gpt-4-turbo\n- gpt-4o\n\n\n",
+    "enforced" : true,
+    "hidden" : true,
+    "label" : "OpenAI Model",
+    "name" : "OPENAI_MODEL",
+    "value" : "gpt-4o",
+    "values" : [ "gpt-3.5-turbo-16k", "gpt-4-turbo", "gpt-4o" ],
+    "valuesListDelimiter" : ","
+  } ],
+  "plugins" : {
+    "ExecutionLifecycle" : { }
+  },
+  "scheduleEnabled" : true,
+  "sequence" : {
+    "commands" : [ {
+      "description" : "Update Documentation/Confluence",
+      "fileExtension" : ".py",
+      "interpreterArgsQuoted" : false,
+      "script" : "#MIT License\n# Copyright (c) 2023\n# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nimport requests\nimport markdown\nfrom openai import OpenAI\n\n# Initialize the OpenAI client with your API key\nclient = OpenAI(api_key='@unquotedoption.API_TOKEN@')\n\n# Configuration settings - you made need to update any of these\napiSettings = {\n    'rundeckUrl': '@option.RUNBOOK_SERVER@',\n    'authToken': '@option.RBA_TOKEN@',\n    'jobId': '@option.JOB_ID@',\n    'openaiModel': '@option.OPENAI_MODEL@',\n    'confluenceEnabled': \"@option.CONFLUENCE@\",\n    'confluenceUrl': '@option.CONFLUENCE_LOCATION@//wiki/rest/api/content',\n    'confluenceAuth': ('@option.CONFLUENCE_USER@', 'CONFLUENCE_KEY'),\n    'confluenceSpacekey': '@option.CONFLUENCE_SPACEKEY@'\n}\n\n#-----------------------------------------------------------------------------------\nprompt =\"\"\" You are a professional markdown documentation generator for enterprise software.\nCheck the attached json, and analyse the script field. \nDiscard any description fields that preexist. \nIgnore any group reference\nDescribe the code, highlight any languages or runtimes.\nEnsure you have the description of the activity and list external variables as a markdown table. \nPay extra attention to the description, and highlight any steps as bullet points\nHave a seperate section for prerequisites.\nAnything that mentions options will be a user enterable variable. Add defaults if defined\nadd only this disclaimer = This document and the described automation job are provided \"as is\" without warranty of any kind, express or implied. The user assumes all risks associated with the use of this job. The creators or contributors are not liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this job, even if advised of the possibility of such damage.\nAdd a supplied as is disclaimer statement at the end\nFollow the template below for section headings:\nFirst two lines empty\nDescription.\nSub heading author: if possible, otherwise skip\nSub heading last modified: if empty, skip\nPrerequsites\nOptions\nDisclaimer\nRefer to the script as Automation Job\noutput in markdown.\nAll bullet points should use bullet points\nheadings need to be bold\nDo not add any text before or after the markdown response\nJson below: \"\"\"\n\nheaders={\n    'X-Rundeck-Auth-Token': apiSettings['authToken'],\n    'Accept': 'application/json',\n    'Content-Type': 'application/json'\n}\n\n# Function to get the job definition from Rundeck\ndef getJobDefinition():\n    endpoint = f\"{apiSettings['rundeckUrl']}/api/44/job/{apiSettings['jobId']}\"\n    response = requests.get(endpoint, headers=headers)\n    if response.status_code == 200:\n        return response.json()\n    else:\n        print(f\"Failed to fetch job definition. Status Code: {response.status_code}\")\n        exit()\n\n# Modify the job definition documentation\ndef modifyJobDocumentation(jobDefinition, docs):\n    docsFormatted = '\\n' + docs.replace('# Description', '\\n\\n# Description: ')\n    docsFormatted = docsFormatted.replace('\\\\n', '.  ').replace('markdown', '').replace('```', '')\n    jobDefinition[0]['description'] = docsFormatted\n    return jobDefinition\n\n# Update the job definition in Rundeck\ndef updateJobDefinition(jobDefinition, projectName):\n    endpoint = f\"{apiSettings['rundeckUrl']}/api/47/project/{projectName}/jobs/import?dupeOption=update&format=json\"\n    response = requests.post(endpoint, json=jobDefinition, headers=headers)\n    if response.status_code in [200, 204]:\n        print('🟩 Job posted successfully.')\n    else:\n        print(f'Failed to post job. Status Code: {response.status_code}, Response: {response.text}')\n        exit()\n\n# Query the OpenAI API\ndef queryOpenAI(prompt):\n    try:\n        response = client.chat.completions.create(\n            model=apiSettings['openaiModel'],\n            messages=[{\"role\": \"user\", \"content\": prompt}],\n            temperature=0.7,\n            max_tokens=2048\n        )\n        if response.choices and len(response.choices) > 0:\n            return response.choices[0].message.content\n        else:\n            print(\"No content was extracted from the response.\")\n            return None\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n        return None\n\n# Get project information by job ID\ndef getProjectInfo(jobId):\n    endpoint = f\"{apiSettings['rundeckUrl']}/api/44/job/{jobId}/info\"\n    response = requests.get(endpoint, headers=headers)\n    if response.status_code == 200:\n        data = response.json()\n        return data.get(\"project\"), data.get(\"href\")\n    else:\n        print(\"Failed to fetch data. Status code:\", response.status_code)\n        exit()\n\n# Convert Markdown to HTML\ndef convertMarkdownToHtml(markdownContent, prefix=\"\"):\n    fullMarkdown = prefix + markdownContent\n    htmlContent = markdown.markdown(fullMarkdown, extensions=['tables', 'extra'])\n    return htmlContent\n\n# Post to Confluence\ndef postToConfluence(html_content, title, space_key, url, auth):\n    data = {\n        \"type\": \"page\",\n        \"title\": title,\n        \"space\": {\"key\": space_key},\n        \"body\": {\n            \"storage\": {\n                \"value\": html_content,\n                \"representation\": \"storage\"\n            }\n        }\n    }\n    response = requests.post(url, json=data, auth=auth, headers=headers)\n    return response  \n# Main execution function\ndef main():\n    print (\"1.🧩 --- Get Job from Repository --- \")\n    jobDefinition = getJobDefinition()\n    projectName, projectUrl = getProjectInfo(apiSettings['jobId'])\n    print (\"2.🧩 --- Generate Docs from OpenAI --- \")\n    docs = queryOpenAI(prompt + str(jobDefinition))\n    if docs:\n        modifiedJobDefinition = modifyJobDocumentation(jobDefinition, docs)\n        print (\"3.🧩 --- Modify Docs and Save --- \")\n        updateJobDefinition(modifiedJobDefinition, projectName)\n        if apiSettings['confluenceEnabled']==\"Yes\":\n            projectUrl=f\"{apiSettings['rundeckUrl']}/project/{projectName}/job/show/{apiSettings['jobId']}\"\n            prefix = f\"\"\"\n# Information\n\n| Field             | Settings |\n|-------------------|----------|\n| 📃 Project Name   | {projectName} |\n| 📃 Job Name       | {jobDefinition[0]['name']} |\n| 🆔 Job ID         | {apiSettings['jobId']} |\n| 👟 Can be executed| {str(jobDefinition[0]['executionEnabled'])} |\n| ⏲ Can be scheduled| {str(jobDefinition[0]['scheduleEnabled'])} |\n| 📃 URL            | [{projectUrl}]({projectUrl}) |\n\n---\n\"\"\"\n            htmlContent = convertMarkdownToHtml(docs, prefix)\n            # Assume there's a function postToConfluence() defined somewhere that handles posting to Confluence\n            print (\"3.🧩 --- Post to Confluence --- \")\n            response = postToConfluence(htmlContent, jobDefinition[0]['name'], apiSettings['confluenceSpacekey'], apiSettings['confluenceUrl'], apiSettings['confluenceAuth'])\n          \n            if response.status_code == 200:\n                print(\"4.🧩 Page created successfully!\")\n            else:\n                print(\"4. Failed to create page:\", response.status_code)\n                print(response.text)\n\nif __name__ == '__main__':\n    main()\n",
+      "scriptInterpreter" : "python3"
+    } ],
+    "keepgoing" : false,
+    "strategy" : "node-first"
+  },
+  "uuid" : "f6975c35-c075-4098-94c1-9c692b4698cb"
+} ]
