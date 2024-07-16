@@ -2,7 +2,7 @@
 
 ## Description
 
-The GenAI Documentation Assistant is a Rundeck job that automates the process of creating and updating documentation for Rundeck jobs using OpenAI's GPT models. This tool can significantly streamline your documentation workflow by:
+The GenAI AutoDocumentation is a Rundeck job that automates the process of creating and updating documentation for Rundeck jobs using OpenAI's GPT models. This tool can significantly streamline your documentation workflow by:
 
 1. Fetching job definitions from a Rundeck server
 2. Generating new documentation based on the job definition using OpenAI
